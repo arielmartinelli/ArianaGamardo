@@ -1777,6 +1777,15 @@ button {
    Responsive Media Queries
    ========================================================================== */
 
+/* Safety section overflows to prevent iOS Safari horizontal scroll */
+.hero-section, .about-section, .trajectory-section, .campaign-section, .sponsors-section, .contact-section {
+    overflow: hidden;
+}
+
+.method-link {
+    word-break: break-all;
+}
+
 /* Large Tablets & Desktop downscales */
 @media (max-width: 1024px) {
     .hero-container {
@@ -1843,8 +1852,8 @@ button {
     }
 }
 
-/* Mobile Devices */
-@media (max-width: 768px) {
+/* Tablets (Portrait) and Mobile Devices */
+@media (max-width: 991px) {
     .section-container {
         padding: 60px 16px;
     }
@@ -1975,7 +1984,7 @@ button {
         left: 9px !important;
     }
     
-    /* Campaign */
+    /* Campaign & Simulator */
     .dashboard-card {
         padding: 24px 16px;
     }
@@ -1986,6 +1995,15 @@ button {
     
     .simulator-buttons-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sim-btn:last-child {
+        grid-column: span 2;
+    }
+    
+    /* Hide absolute about decoration on mobile to prevent overflow */
+    .about-decor-circle, .about-decor-dots {
+        display: none;
     }
     
     /* Form */
@@ -2003,6 +2021,7 @@ button {
     }
 }
 
+/* Small Smart Phones */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2.2rem;
@@ -2032,7 +2051,63 @@ button {
         padding-bottom: 0;
     }
     
+    .about-card-stat {
+        padding: 10px 14px;
+        gap: 10px;
+        max-width: 200px;
+        right: 0px;
+        top: -10px;
+    }
+    
+    .about-card-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .about-card-text h3 {
+        font-size: 1rem;
+    }
+    
+    .about-card-text p {
+        font-size: 0.65rem;
+    }
+    
+    .tier-card {
+        padding: 30px 16px;
+    }
+}
+
+/* Extra Tight Devices (iPhone SE, etc.) */
+@media (max-width: 380px) {
+    .payment-detail-box {
+        padding: 12px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .box-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .box-value {
+        font-size: 0.85rem;
+    }
+    
+    .copy-btn {
+        width: 28px;
+        height: 28px;
+        align-self: flex-end;
+    }
+    
     .simulator-buttons-grid {
         grid-template-columns: 1fr;
     }
+    
+    .sim-btn:last-child {
+        grid-column: span 1;
+    }
 }
+
