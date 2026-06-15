@@ -1,0 +1,15 @@
+{
+  "name": "ariana-gamardo-sponsors",
+  "version": "1.0.0",
+  "description": "Sitio web oficial de sponsors para Ariana Gamardo, atleta de taekwondo.",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -o"
+  },
+  "keywords": [
+    "taekwondo",
+    "sponsors",
+    "ariana-gamardo"
+  ],
+  "author": "Ariana Gamardo",
+  "license": "ISC"
+}
