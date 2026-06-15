@@ -601,6 +601,15 @@ button {
     background-size: 16px 16px;
 }
 
+.about-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 0;
+}
+
 .about-profile-pic::before {
     content: '';
     position: absolute;
