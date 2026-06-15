@@ -934,6 +934,189 @@ button {
 }
 
 /* ==========================================================================
+   Gallery / Carousel Section
+   ========================================================================== */
+.gallery-section {
+    background-color: var(--bg-primary);
+    position: relative;
+}
+
+.carousel-wrapper {
+    max-width: 850px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 50px; /* Space for arrows */
+}
+
+.carousel-container-inner {
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-premium);
+    border: 1px solid var(--border-color);
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: var(--bg-secondary);
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity var(--transition-slow) ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2;
+    position: relative;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 6s ease;
+}
+
+.carousel-slide.active .carousel-img {
+    transform: scale(1.05); /* Subtle Ken Burns effect */
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 0.4) 60%, rgba(11, 15, 25, 0) 100%);
+    padding: 40px 30px 30px;
+    color: var(--text-primary);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transform: translateY(10px);
+    transition: transform var(--transition-normal) ease;
+}
+
+.carousel-slide.active .carousel-caption {
+    transform: translateY(0);
+}
+
+.carousel-caption h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-cyan);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.carousel-caption p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+/* Arrow Navigation */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all var(--transition-fast);
+}
+
+.carousel-arrow:hover {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow-cyan-glow);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev {
+    left: -10px;
+}
+
+.carousel-arrow.next {
+    right: -10px;
+}
+
+/* Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1.5px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.indicator-dot.active {
+    background-color: var(--color-cyan);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--color-cyan);
+}
+
+.indicator-dot:hover {
+    background-color: var(--color-cyan);
+}
+
+/* Responsive adjustments for Carousel */
+@media (max-width: 768px) {
+    .carousel-wrapper {
+        padding: 0;
+    }
+    
+    .carousel-arrow {
+        display: none; /* Hide arrows on touch screens, dots are enough */
+    }
+    
+    .carousel-caption {
+        padding: 30px 20px 20px;
+    }
+    
+    .carousel-caption h3 {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================================================
    Campaign Section (Interactive Dashboard)
    ========================================================================== */
 .campaign-section {

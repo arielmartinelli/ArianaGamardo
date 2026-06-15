@@ -301,6 +301,92 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
+       Photo Carousel / Gallery Logic
+       ========================================================================== */
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const indicatorDots = document.querySelectorAll('.indicator-dot');
+    let currentSlideIndex = 0;
+    let autoplayTimer = null;
+
+    const goToSlide = (index) => {
+        // Handle wrapping
+        if (index >= slides.length) {
+            currentSlideIndex = 0;
+        } else if (index < 0) {
+            currentSlideIndex = slides.length - 1;
+        } else {
+            currentSlideIndex = index;
+        }
+
+        // Update slides DOM
+        slides.forEach((slide, i) => {
+            if (i === currentSlideIndex) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        // Update indicators DOM
+        indicatorDots.forEach((dot, i) => {
+            if (i === currentSlideIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    const startAutoplay = () => {
+        stopAutoplay(); // Clear existing
+        autoplayTimer = setInterval(() => {
+            goToSlide(currentSlideIndex + 1);
+        }, 5000); // Auto change slide every 5 seconds
+    };
+
+    const stopAutoplay = () => {
+        if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+        }
+    };
+
+    // Event listeners
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentSlideIndex - 1);
+            startAutoplay(); // Reset timer
+        });
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentSlideIndex + 1);
+            startAutoplay(); // Reset timer
+        });
+    }
+
+    // Dot indicators click events
+    indicatorDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.getAttribute('data-slide'));
+            goToSlide(index);
+            startAutoplay(); // Reset timer
+        });
+    });
+
+    // Pause autoplay on mouse enter and resume on leave
+    const carouselWrapper = document.querySelector('.carousel-wrapper');
+    if (carouselWrapper) {
+        carouselWrapper.addEventListener('mouseenter', stopAutoplay);
+        carouselWrapper.addEventListener('mouseleave', startAutoplay);
+    }
+
+    // Initialize Autoplay
+    if (slides.length > 0) {
+        startAutoplay();
+    }
+
+    /* ==========================================================================
        Contact Form Submission (Mock backend)
        ========================================================================== */
     const contactForm = document.getElementById('contactForm');
